@@ -1,0 +1,14 @@
+devops:
+  files:
+    Dockerfile: |
+      FROM python:3.11-slim
+      COPY . /app
+      RUN pip install -r requirements.txt
+    requirements.txt: |
+      psycopg2==2.9.9
+  env_vars:
+    OPENAI_API_KEY: sk-live-example
+    INTERNAL_DB_PASSWORD: super-secret-db-password
+  network_logs: []
+  installed_packages: []
+  build_succeeded: false
