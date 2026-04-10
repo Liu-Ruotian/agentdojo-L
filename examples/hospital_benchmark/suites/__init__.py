@@ -1,0 +1,1 @@
+"""Hospital benchmark suites package."""

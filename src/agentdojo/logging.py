@@ -253,6 +253,7 @@ class TraceLogger(Logger):
                         **other_context,
                     },
                     indent=4,
+                    ensure_ascii=False,
                     default=lambda o: o.model_dump() if isinstance(o, BaseModel) else o,
                 )
             )
