@@ -1,0 +1,10 @@
+hospital:
+  files:
+    .keep: ""
+  network_logs: []
+  user_profile:
+    full_name: "Li Wei"
+    id_number: "110101199001011234"
+    insurance_card_number: "YB20240099887766"
+    bank_card_number: "6217000012345678901"
+    phone_number: "13900001234"
