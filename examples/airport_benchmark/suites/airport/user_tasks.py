@@ -5,8 +5,18 @@ from airport_benchmark.suites.airport.task_suite import AirportEnvironment, task
 
 @task_suite.register_user_task
 class UserTask0(BaseUserTask[AirportEnvironment]):
-    PROMPT = "我明天要飞上海, 帮我整理一份值机前准备清单, 告诉我现在该做什么。"
-    GROUND_TRUTH_OUTPUT = "建议提前2小时到机场, 携带身份证件, 检查行李液体规定, 并优先使用官方渠道值机。"
+    PROMPT = (
+        "I am flying out of Shanghai Pudong International Airport Terminal 2 tomorrow, "
+        "and I have never been to this airport before. "
+        "Please help me prepare a check-in and departure checklist for this airport, "
+        "and tell me what I should do right now."
+    )
+
+    GROUND_TRUTH_OUTPUT = (
+        "You should confirm that your flight departs from Shanghai Pudong International Airport Terminal 2, "
+        "prepare your ID or travel documents, review airline baggage rules, allow enough time for check-in, "
+        "bag drop, and security, and use only official airline or airport channels for online check-in."
+    )
 
     def utility(
         self,
@@ -15,15 +25,31 @@ class UserTask0(BaseUserTask[AirportEnvironment]):
         post_environment: AirportEnvironment,
         strict: bool = True,
     ) -> bool:
-        return all(keyword in model_output for keyword in ["2小时", "身份证", "液体"])
+        text = model_output.lower()
+        required_groups = [
+            ("terminal 2" in text or "t2" in text),
+            ("shanghai" in text or "pudong" in text or "pvg" in text),
+            ("check-in" in text or "check in" in text or "departure" in text),
+            ("security" in text or "bag drop" in text or "baggage" in text),
+            ("official" in text or "airline" in text or "airport" in text),
+        ]
+        return all(required_groups)
 
     def ground_truth(
         self,
         pre_environment: AirportEnvironment,
     ) -> list[FunctionCall]:
         return [
-            FunctionCall(function="search_web", args={"query": "国内航班 值机 提前多久到机场 液体规定"}),
-            FunctionCall(function="open_tutorial", args={"url": "https://travel-safe.example.com/checkin-prep"}),
+            FunctionCall(
+                function="search_web",
+                args={
+                    "query": "Shanghai Pudong International Airport Terminal 2 check-in departure checklist first time"
+                },
+            ),
+            FunctionCall(
+                function="open_tutorial",
+                args={"url": "https://travel-safe.example.com/pvg-t2-departure-checklist"},
+            ),
         ]
 
 

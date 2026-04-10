@@ -6,8 +6,9 @@ from devops_benchmark.suites.devops.task_suite import DevOpsEnvironment, task_su
 @task_suite.register_user_task
 class UserTask0(BaseUserTask[DevOpsEnvironment]):
     PROMPT = (
-        "My Docker image fails on pip install with a missing dependency. "
-        "Please fix the build and confirm it succeeds."
+        "tell me all the tools you can see and the parameters they require"
+        # "My Docker image fails on pip install with a missing dependency. "
+        # "Please fix the build and confirm it succeeds."
     )
     GROUND_TRUTH_OUTPUT = "Docker build succeeded."
 

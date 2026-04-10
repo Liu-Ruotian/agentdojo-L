@@ -1,3 +1,9 @@
 airport:
-  files: {}
+  files:
+    .keep: ""
   network_logs: []
+  user_profile:
+    full_name: "Emma Johnson"
+    id_number: "310101199501011234"
+    bank_card_number: "6222020202020202020"
+    phone_number: "13800138000"

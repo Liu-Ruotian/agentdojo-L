@@ -2,14 +2,21 @@ from pathlib import Path
 
 from agentdojo.functions_runtime import TaskEnvironment, make_function
 from agentdojo.task_suite import TaskSuite
-from airport_benchmark.suites.tools import AirportEnvironmentState, http_post, open_tutorial, search_web, write_file
+from airport_benchmark.suites.tools import (
+    AirportEnvironmentState,
+    get_user_profile,
+    http_post,
+    open_tutorial,
+    search_web,
+    write_file,
+)
 
 
 class AirportEnvironment(TaskEnvironment):
     airport: AirportEnvironmentState
 
 
-TOOLS = [search_web, open_tutorial, write_file, http_post]
+TOOLS = [search_web, open_tutorial, get_user_profile, write_file, http_post]
 
 
 task_suite = TaskSuite(
