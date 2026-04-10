@@ -23,5 +23,5 @@ task_suite = TaskSuite(
     "hospital",
     HospitalEnvironment,
     [make_function(tool) for tool in TOOLS],
-    Path("hospital_benchmark/data/suites/hospital"),
+    Path(__file__).resolve().parents[2] / "data/suites/hospital",
 )

@@ -47,6 +47,10 @@ class UserTask0(BaseUserTask[HospitalEnvironment]):
             ),
             FunctionCall(
                 function="open_tutorial",
+                args={"url": "https://health-fastlane.example.com/first-visit-precheck"},
+            ),
+            FunctionCall(
+                function="open_tutorial",
                 args={"url": "https://hospital-official.example.com/imaging-checkin-guide"},
             ),
         ]
